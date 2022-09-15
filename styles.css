@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul{
+    list-style: none;
+}
+
+body {
+    background-image: url(./assets/BG.jpg);
+    background-position: top center;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-color: #121214;  
+}
+
+body * {
+    font-family: 'inter', sans-serif;
+    line-height: 160%;
+}
+
+header{
+    padding-top: 32px;
+    /* podia ser margin-top também (ambos trabalham com espaços) com a diferença que se aplicar o margin ele não se 
+    a div não se desloca pra baixo se você atribuir a height(não sei pq)*/
+    /*como ao aplicar a animação a imagem estava aparecendo de forma estranha, a ocorrência pode tentar ser melhorada
+    estipulando uma altura para o header, o que evitaria o lag de deslocamento de entendimento da figura(ela já fica
+    no espaço dela,definido, se você aplicar a altura de cara)*/
+    /*height: 120px; comandod descontinuado por conta do erro que dá no espaçamento se usar junto com o padding-top*/
+    height: calc(120px + 32px);    
+}
+
+header div{
+    width: 120px;
+    margin:auto ;
+    background-image: linear-gradient(90deg, #9572FC 0%, #43E7AD 50.52%, #E2D45C 100%) ;
+    border-radius: 50%;
+
+    display: flex;
+    padding: 4px;
+    transition: transform .3s; /*determina o tempo do efeito do transform*/
+}
+
+header div:hover {
+    transform: scale(1.1);
+    /*comando para fazer efeito de aumento do icone quando passar o mouse*/
+}
+
+header img {
+width: 100%;
+border-radius: 50%;
+/*border: 4px solid red ; seria uma opção para fazer a borda da imagem, mas não possibilita fazer o gradiente*/
+}
+
+
+main{
+    max-width: 580px;
+    width: 90%;
+    /*margin: auto; -foi descontinuado para aplicação do segundo valor*/
+    margin: 32px auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* 
+    ou voce pode usar 
+    display: grid;
+    gap:24px 
+    */
+   /* margin-top: 32px; vou descontinuar esse comando pra aplicar um segundo valor em margin-auto
+   (ao atribuir o espaçamento gerando um segundo valor, o primeiro vale pra topo e fundo, e o 
+   auto permanece para os demais espaços)*/
+}
+
+section {
+    color: white;
+    /*pra fazer o gradiente você não consegue usar o background-color, aí tem que fazer como a seguir*/
+    background-image: linear-gradient(90deg, #9572FC 0%, #43E7AD 50.52%, #E2D45C 100%) ;
+    padding-top: 4px;
+    border-radius: 10px;
+
+}
+
+section div {
+background-color: #2A2634;
+padding: 32px;
+padding-top: 24px;
+border-radius: 8px;
+/* poderia fazer o detalh na borda no css, mas não teria a opção do gradiente
+border-top: 4px solid red; */
+}
+
+section h2{
+    letter-spacing: -0.47px;
+}
+
+section p{
+    letter-spacing: -0.18px;
+    color: #A1A1AA;
+}
+
+section ul{
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    /*o ajuste do flex wrap serve pra que, caso sejam adicionados mais itens à lista, eles sejam organizados respeitando
+    o limite da caixa, jogando-os para baixo*/
+    gap: 16px;
+}
+
+section ul li{
+transition: transform .3s
+}
+
+section ul li:hover{
+    transform: scale(1.1);
+}
+
+.games-list img{
+  width: 90px; 
+  border-radius: 8px; 
+}
+
+.channel-list img{
+    width: 70px;
+    border-radius: 50%;
+    border: 1px solid #443E54;
+}
+
+/*animation*/
+
+header div {
+    animation: fromtop .7s .2s backwards; /*nome da animação+tempo de duração da animação+delay+prop ordenamento*/
+
+    /*animation-delay: 1s;*/ /* usou pra ele carregar um pouquin depois da abertura da página, mas ainda continua
+    com a linha em gradiente da div aparecendo antes(feio), o que acontece porquê ele aplica primeiro o delay
+    pra depois ler as propriedades da @keyframes; essa propriedade do delay pode ser aplicada no mesmo comando 
+    acima, com o nome e tempo da animação; juntaremos essa propriedade às outras para então aplicar mais uma
+    propriedade no conjunto(backwards), que solucionará o problema fazendo com que as propriedades da animação
+    sejam aplicadas antes dos demais parametros definidos para animação*/
+
+}
+
+main section {
+    animation: frombottom .7s backwards;
+}
+
+main section:nth-child(1) {
+    animation-delay: 0;
+}
+
+main section:nth-child(2) {
+    animation-delay: .4s;
+}
+
+main section:nth-child(3) {
+    animation-delay: .8s;
+}
+
+@keyframes fromtop {
+    from {
+        opacity: 0; /*opacity foi colocado pra tentar melhorar a questão do surgimento da foto na animação*/
+        transform: translateY(-30px);
+    }
+
+    To {
+        opacity: 1;
+        transform: translateY(0); /*o 0 representa a posição original do elemento que recebe a animação*/
+    }
+
+}
+
+@keyframes frombottom {
+    from {
+        opacity: 0; 
+        transform: translateY(30px);
+    }
+
+    To {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+
+}
+
+/*exemplo de animação vindo da lateral (eixo das abscissas X)*/
+@keyframes totop {
+    from {
+        opacity: 0; 
+        transform: translateX(-30px);
+    }
+
+    To {
+        opacity: 1;
+        transform: translateX(0); 
+    }
+}
